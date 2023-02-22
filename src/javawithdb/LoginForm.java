@@ -42,7 +42,7 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 18)); // NOI18N
         jLabel2.setText("Password:");
 
-        Signin.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        Signin.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         Signin.setText("SignIn");
         Signin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,7 +50,7 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
-        Singup.setFont(new java.awt.Font("Liberation Sans", 0, 12)); // NOI18N
+        Singup.setFont(new java.awt.Font("Liberation Sans", 0, 14)); // NOI18N
         Singup.setText("SignUp");
         Singup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,19 +71,14 @@ public class LoginForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(Log, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Password, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(Signin, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Singup, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(Log, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(Password, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                    .addComponent(Singup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Signin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,13 +92,13 @@ public class LoginForm extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Signin)
-                    .addComponent(Singup))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
+                .addComponent(Signin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Singup, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,7 +114,7 @@ public class LoginForm extends javax.swing.JFrame {
             
             Connection conx = DriverManager.getConnection(banco, usuario, senha);
             Statement Com = conx.createStatement();
-            String sql = "select * from cadastro where login='"+Log.getText()+"'and senha='"+String.valueOf(Password.getPassword())+"';";
+            String sql = "select * from cadastro where email='"+Log.getText()+"'and senha='"+String.valueOf(Password.getPassword())+"';";
             
             ResultSet resultado = Com.executeQuery(sql);
             
@@ -143,22 +138,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_SigninActionPerformed
 
     private void SingupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SingupActionPerformed
-        try 
-        {
-            String banco = "jdbc:mysql://localhost/escola";
-            String usuario = "root";
-            String senha = "";
-            
-            
-            Connection conx = DriverManager.getConnection(banco, usuario, senha);
-            Statement Com = conx.createStatement();
-            Com.execute("insert into cadastro(login, senha) values('"+Log.getText()+"', '"+String.valueOf(Password.getPassword())+"');");
-            
-        }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(JavaWithDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        new NewUser().setVisible(true);
     }//GEN-LAST:event_SingupActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
